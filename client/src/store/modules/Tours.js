@@ -22,8 +22,8 @@ const actions = {
       }
       return res;
     } catch (err) {
-      console.log(err.response.data);
-      commit('error_response', err.response.data);
+      console.log(err.response.data.msg);
+      commit('error_response', err.response.data.msg);
     }
   }
 };
