@@ -5,7 +5,7 @@
         <v-card :loading="loading" class="mx-auto mb-5 " max-width="374">
           <v-img
             height="250"
-            src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+            :src="`http://localhost:8000/img/tours/${tour.imageCover}`"
           ></v-img>
 
           <v-card-title>{{ tour.name }}</v-card-title>
