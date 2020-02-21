@@ -2,7 +2,6 @@
   <v-app>
     <Navbar />
     <v-content>
-      <Showcase />
       <router-view></router-view>
     </v-content>
     <Footer />
@@ -10,17 +9,15 @@
 </template>
 
 <script>
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Showcase from "./components/Showcase";
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 export default {
-  name: "App",
+  name: 'App',
 
   components: {
     Navbar,
-    Footer,
-    Showcase
+    Footer
   },
 
   data: () => ({
