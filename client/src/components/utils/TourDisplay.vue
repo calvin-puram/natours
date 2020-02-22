@@ -1,18 +1,20 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-md-4 col-sm-12">
-        <img src="../../../public/img/showcase/tour-4-1.jpg" alt="" />
-      </div>
-      <div class="col-md-4 col-sm-12">
-        <img src="../../../public/img/showcase/tour-4-3.jpg" alt="" />
-      </div>
-      <div class="col-md-4 col-sm-12">
-        <img src="../../../public/img/showcase/tour-6-2.jpg" alt="" />
+      <div class="col-md-4 col-sm-12" v-for="img in getTour.images" :key="img">
+        <img :src="`http://localhost:8000/img/tours/${img}`" alt="showcase" />
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex';
+
+export default {
+  computed: mapGetters(['getTour'])
+};
+</script>
 
 <style scoped>
 img {

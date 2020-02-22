@@ -30,6 +30,7 @@ const actions = {
   // GET ONE TOUR
   async singleTour({ commit }, slug) {
     try {
+      console.log(slug);
       commit('loading_state');
       const res = await axios.get(`http://localhost:8000/api/v1/tours/${slug}`);
       if (res.data.success) {

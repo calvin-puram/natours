@@ -23,9 +23,9 @@
 
     <v-app-bar app color="#009432" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title class="hidden-xs-only" link to="/">
+      <router-link class="hidden-xs-only ml-5" to="/">
         <v-img src="/img/logo-green.png" width="140px"></v-img>
-      </v-toolbar-title>
+      </router-link>
       <v-spacer></v-spacer>
       <!-- MENU -->
       <div class="text-center mr-5 ">

@@ -3,100 +3,80 @@
     <!-- HERO SECTION -->
     <div class="image">
       <v-img
-        src="/img/showcase/tour-1-1.jpg"
+        :src="`http://localhost:8000/img/tours/${getTour.imageCover}`"
         gradient="rgba(0,0,0, 0.5), rgba(0,0,0, 0.5)"
       >
         <v-row class="white--text fill-height" align="center" justify="center">
-          <h1 class="heading hidden-xs-only ">
-            The Park Camper Tour
-          </h1>
+          <h1 class="heading hidden-xs-only ">{{ getTour.name }} Tour</h1>
         </v-row>
       </v-img>
     </div>
     <!-- NEXT -->
     <v-container class="p-0">
       <div class="section-a row ">
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-4 col-sm-12">
           <div>
             <h2 class="text-center my-3 green--text headline">Quick Facts</h2>
-            <div class="d-flex justify-space-around mb-2">
+            <div class="d-flex justify-space-between mb-2">
               <span class="font-weight-medium">NEXT DATE</span>
-              <span> June 2020</span>
+              <span> {{ new Date(getTour.startDates[0]).toDateString() }}</span>
             </div>
 
-            <div class="d-flex justify-space-around mb-2">
+            <div class="d-flex justify-space-between mb-2">
               <span class="font-weight-medium">DIFFICULTY</span>
-              <span> MEDIUM</span>
+              <span> {{ getTour.difficulty.toUpperCase() }}</span>
             </div>
 
-            <div class="d-flex justify-space-around mb-2">
+            <div class="d-flex justify-space-between mb-2">
               <span class="font-weight-medium">PARTICIPANTS</span>
-              <span> 20 People</span>
+              <span> {{ getTour.maxGroupSize }} People</span>
             </div>
 
-            <div class="d-flex justify-space-around mb-2">
+            <div class="d-flex justify-space-between ">
               <span class="font-weight-medium">RATINGS</span>
-              <span> 4.5/7</span>
+              <span>
+                {{ getTour.ratingsAverage }}/{{ getTour.ratingsQuantity }}</span
+              >
             </div>
           </div>
+          <v-divider></v-divider>
           <!-- TOUR GUIDES -->
           <div class="guides">
-            <h2 class="text-center my-3 green--text headline">
+            <h2 class="text-center mb-2 green--text headline">
               YOUR TOUR GUIDES
             </h2>
-            <div class="d-flex justify-space-around align-center mb-2">
+            <div
+              class="d-flex justify-space-between align-content-center mb-2"
+              v-for="guide in getTour.guides"
+              :key="guide._id"
+            >
               <span>
                 <v-avatar class="mr-3">
                   <img
-                    src="https://cdn.vuetifyjs.com/images/john.jpg"
+                    :src="`http://localhost:8000/img/users/${guide.photo}`"
                     alt="John"
                   />
                 </v-avatar>
-                <span class="font-weight-medium">LEAD GUIDE</span>
+                <span class="font-weight-medium">{{
+                  guide.role === 'guide' ? 'Admin-Guide' : 'Lead-Guide'
+                }}</span>
               </span>
-              <span>John James</span>
-            </div>
-
-            <div class="d-flex justify-space-around align-center mb-2">
-              <span>
-                <v-avatar class="mr-3">
-                  <img
-                    src="https://cdn.vuetifyjs.com/images/john.jpg"
-                    alt="John"
-                  />
-                </v-avatar>
-                <span class="font-weight-medium">LEAD GUIDE</span>
-              </span>
-              <span>John James</span>
+              <span>{{ guide.name }}</span>
             </div>
           </div>
         </div>
 
         <!-- NEXT -->
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-8 col-sm-12">
           <div
-            class="d-flex flex-column align-center justify-center tour-description"
+            class="d-flex flex-column align-center justify-center ml-10 tour-description"
           >
             <h2 class="green--text my-2 headline">
               ABOUT THE PARK CAMPER TOUR
             </h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </p>
-
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </p>
+            <div v-for="para in getTour.description.split('\n')" :key="para">
+              <p>{{ para }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -143,7 +123,7 @@ export default {
 }
 
 .guides {
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 
 .tour-description {
