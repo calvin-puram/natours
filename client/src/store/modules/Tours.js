@@ -9,7 +9,8 @@ const state = {
 const getters = {
   getTours: () => state.tours,
   isLoading: () => state.loading,
-  getErrors: () => state.errors
+  getErrors: () => state.errors,
+  getTour: () => state.tour
 };
 const actions = {
   // GET ALL TOURS
