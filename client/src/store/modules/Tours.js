@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const state = {
   tours: [],
+  tour: {},
   loading: false,
   errors: null
 };
@@ -17,8 +18,22 @@ const actions = {
       commit('loading_state');
       const res = await axios.get('http://localhost:8000/api/v1/tours');
       if (res.data.success) {
-        console.log(res.data.data);
         commit('tours_response', res.data.data);
+      }
+      return res;
+    } catch (err) {
+      commit('error_response', err.response);
+    }
+  },
+
+  // GET ONE TOUR
+  async singleTour({ commit }, slug) {
+    try {
+      commit('loading_state');
+      const res = await axios.get(`http://localhost:8000/api/v1/tours/${slug}`);
+      if (res.data.success) {
+        console.log(res.data.data);
+        commit('tour_response', res.data.data);
       }
       return res;
     } catch (err) {
@@ -42,6 +57,12 @@ const mutations = {
     state.loading = false;
     state.errors = null;
     state.tours = data;
+  },
+
+  tour_response(state, data) {
+    state.loading = false;
+    state.errors = null;
+    state.tour = data;
   }
 };
 

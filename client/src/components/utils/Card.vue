@@ -72,6 +72,7 @@
                 color="#009432"
                 class="white--text"
                 rounded
+                @click="singleTour(tour.slug)"
                 link
                 :to="`/tour/${tour.slug}`"
               >
@@ -94,7 +95,7 @@ export default {
     loading: false
   }),
   methods: {
-    ...mapActions(['allTours'])
+    ...mapActions(['allTours', 'singleTour'])
   },
   created() {
     this.allTours();

@@ -119,6 +119,7 @@ import Map from '../components/utils/Map';
 import Reviews from '../components/utils/Reviews';
 import CTA from '../components/utils/CTA';
 import ImageDisplay from '../components/utils/TourDisplay';
+// import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -126,7 +127,9 @@ export default {
     Reviews,
     CTA,
     ImageDisplay
-  }
+  },
+  
+  
 };
 </script>
 
