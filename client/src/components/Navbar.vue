@@ -23,7 +23,7 @@
 
     <v-app-bar app color="#009432" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>
+      <v-toolbar-title class="hidden-xs-only">
         <v-img src="/img/logo-green.png" width="140px"></v-img>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -86,7 +86,7 @@ export default {
   data: () => ({
     drawer: false,
     showMenu: false,
-    items: [{ title: "Profile" }, { title: "Logout" }]
+    items: [{ title: 'Profile' }, { title: 'Logout' }]
   })
 };
 </script>
