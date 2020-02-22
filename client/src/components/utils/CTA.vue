@@ -11,7 +11,8 @@
             WHAT ARE YOU WAITING FOR?
           </h2>
           <p class="font-weight-light text-white op-8">
-            10 days. 1 adventure. Infinite memories. Make it yours today!
+            {{ getTour.duration }} days. 1 adventure. Infinite memories. Make it
+            yours today!
           </p>
           <a
             class="btn btn-danger-gradiant btn-md border-0 text-white mt-3 text-uppercase"
@@ -24,6 +25,13 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex';
+export default {
+  computed: mapGetters(['getTour'])
+};
+</script>
 
 <style scoped>
 .c2a1 {

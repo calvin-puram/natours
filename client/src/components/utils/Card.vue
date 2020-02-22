@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="md-4 sm-6 xs-12" v-for="tour in getTours" :key="tour._id">
-        <v-card :loading="loading" class="mx-auto mb-5 " max-width="374">
+        <v-card class="mx-auto mb-5 " max-width="374">
           <v-img
             height="250"
             :src="`http://localhost:8000/img/tours/${tour.imageCover}`"
@@ -72,7 +72,6 @@
                 color="#009432"
                 class="white--text"
                 rounded
-                @click="singleTour(tour.slug)"
                 link
                 :to="`/tour/${tour.slug}`"
               >
@@ -88,12 +87,14 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+// import router from '../../router/index';
 
 export default {
   computed: mapGetters(['getTours']),
-  data: () => ({
-    loading: false
-  }),
+
+  data() {
+    return {};
+  },
   methods: {
     ...mapActions(['allTours', 'singleTour'])
   },

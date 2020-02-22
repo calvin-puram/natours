@@ -33,7 +33,8 @@ app.use(hpp());
 app.use(mongoSanitize());
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100
+  max: 100,
+  message: 'too many request from you'
 });
 
 //rate limit

@@ -24,7 +24,7 @@ exports.getTours = factory.getHandler(Tours);
 exports.getOneTour = catchAsync(async (req, res, next) => {
   const tour = await Tours.findOne({ slug: req.params.slug }).populate({
     path: 'reviews',
-    select: 'name photo'
+    select: 'name photo, review'
   });
 
   if (!tour) {

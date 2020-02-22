@@ -12,7 +12,7 @@ const routes = [
   },
   {
     path: '/tour/:slug',
-    name: 'About',
+    name: 'tour',
 
     component: () => import('../views/Tour.vue')
   }
