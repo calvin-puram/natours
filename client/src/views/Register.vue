@@ -44,12 +44,13 @@
 
           <div class=" d-flex justify-content-between align-items-center mt-4">
             <v-btn
-              :disabled="!valid"
+              :disabled="!valid || authLoading"
               color="#009432"
               class="white--text "
-              @click="validate"
+              @click="handleSubmit"
             >
-              Register
+              <i class="fas fa-spin fa-spinner" v-if="authLoading"></i>
+              {{ authLoading ? '' : 'Register' }}
             </v-btn>
 
             <router-link to="/login">Already have an account?</router-link>
@@ -61,7 +62,10 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
+  computed: mapGetters(['getAuthErrors', 'authLoading']),
   data: () => ({
     valid: true,
     name: '',
@@ -86,9 +90,24 @@ export default {
   }),
 
   methods: {
-    validate() {
+    ...mapActions(['register']),
+    handleSubmit() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
+        const user = {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          passwordConfirm: this.confirmPassword
+        };
+        this.register(user).then(res => {
+          if (res && res.data.success) {
+            this.$router.push('/');
+            this.$noty.success("You're registered successfully!");
+          } else {
+            this.$noty.error(this.getAuthErrors);
+          }
+        });
       }
     }
   }

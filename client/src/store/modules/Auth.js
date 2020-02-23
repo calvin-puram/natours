@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const state = {
   token: JSON.parse(localStorage.getItem('token')) || '',
-  user: {},
   errors: null,
   loading: false
 };
@@ -10,9 +9,11 @@ const getters = {
   isLoggedIn: () => !!state.token,
   getUser: () => state.user,
   getAuthErrors: () => state.errors,
-  authLoading: () => state.loading
+  authLoading: () => state.loading,
+  getToken: () => state.token
 };
 const actions = {
+  //LOGIN USER
   async login({ commit }, user) {
     try {
       commit('loading_status');
@@ -24,8 +25,26 @@ const actions = {
         localStorage.setItem('token', JSON.stringify(res.data));
         axios.defaults.headers.common['Authorization'] = res.data;
         commit('login_status', res.data);
+      }
+      return res;
+    } catch (err) {
+      console.log(err.response.data.msg);
+      commit('authError_status', err.response.data.msg);
+    }
+  },
 
-        console.log(res.data);
+  //REGISTER USER
+  async register({ commit }, user) {
+    try {
+      commit('loading_status');
+      const res = await axios.post(
+        'http://localhost:8000/api/v1/users/signup',
+        user
+      );
+      if (res.data.success) {
+        localStorage.setItem('token', JSON.stringify(res.data));
+        axios.defaults.headers.common['Authorization'] = res.data;
+        commit('login_status', res.data);
       }
       return res;
     } catch (err) {

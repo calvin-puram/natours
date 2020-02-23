@@ -64,8 +64,11 @@
         v-if="isLoggedIn"
       >
         <template v-slot:activator="{ on }">
-          <v-avatar v-on="on" class="mr-5">
-            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+          <v-avatar v-on="on" class="mr-5" v-if="getToken">
+            <img
+              :src="`http://localhost:8000/img/users/${getToken.data.photo}`"
+              alt="user"
+            />
           </v-avatar>
         </template>
 
@@ -88,7 +91,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  computed: mapGetters(['isLoggedIn', 'isLoading']),
+  computed: mapGetters(['isLoggedIn', 'isLoading', 'getToken']),
   props: {
     source: String
   },
