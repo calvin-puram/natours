@@ -61,6 +61,7 @@
         buttom
         offset-y
         style="max-width: 300px"
+        v-if="isLoggedIn"
       >
         <template v-slot:activator="{ on }">
           <v-avatar v-on="on" class="mr-5">
@@ -84,7 +85,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
+  computed: mapGetters(['isLoggedIn', 'isLoading']),
   props: {
     source: String
   },

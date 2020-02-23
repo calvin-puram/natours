@@ -24,12 +24,13 @@
 
           <div class=" d-flex justify-content-between align-items-center mt-4">
             <v-btn
-              :disabled="!valid"
+              :disabled="!valid || authLoading"
               color="#009432"
               class="white--text "
               @click="handleSubmit"
             >
-              Login
+              <i class="fas fa-spin fa-spinner" v-if="authLoading"></i>
+              {{ authLoading ? '' : 'Login' }}
             </v-btn>
 
             <router-link to="/register">Need an account?</router-link>
@@ -41,7 +42,9 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 export default {
+  computed: mapGetters(['authLoading', 'getAuthErrors']),
   data: () => ({
     valid: true,
     password: '',
@@ -59,6 +62,7 @@ export default {
   }),
 
   methods: {
+    ...mapActions(['login']),
     handleSubmit() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
@@ -66,7 +70,14 @@ export default {
           email: this.email,
           password: this.password
         };
-        console.log(user);
+        this.login(user).then(res => {
+          if (res && res.data.success) {
+            this.$router.push('/');
+            this.$noty.success("You're logged In successfully!");
+          } else {
+            this.$noty.error(this.getAuthErrors)   
+          }
+        });
       }
     }
   }
