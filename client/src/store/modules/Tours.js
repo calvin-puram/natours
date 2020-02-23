@@ -3,7 +3,7 @@ import axios from 'axios';
 const state = {
   tours: [],
   tour: {},
-  loading: false,
+  loading: true,
   errors: null
 };
 const getters = {

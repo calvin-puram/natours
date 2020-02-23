@@ -1,11 +1,11 @@
 <template>
   <div>
     <!-- HERO SECTION -->
-    <div v-if="loading">
+    <div v-if="isLoading">
       <Spinner />
     </div>
-    <div v-if="!loading">
-      <div class="image">
+    <div>
+      <div class="image" v-if="!isLoading">
         <v-img
           :src="`http://localhost:8000/img/tours/${getTour.imageCover}`"
           gradient="rgba(0,0,0, 0.5), rgba(0,0,0, 0.5)"
@@ -92,15 +92,14 @@
             </div>
           </div>
         </div>
-        <!-- TOUR DISPLAY -->
-        <ImageDisplay />
-        <!-- MAP -->
-        <Map />
-        <!-- REVIEWS -->
-        <div>
-          <Reviews />
-        </div>
       </v-container>
+      <!-- TOUR DISPLAY -->
+      <ImageDisplay />
+
+      <!-- REVIEWS -->
+      <div>
+        <Reviews />
+      </div>
       <!-- CTA -->
       <CTA />
     </div>
@@ -108,7 +107,6 @@
 </template>
 
 <script>
-import Map from '../components/utils/Map';
 import Reviews from '../components/utils/Reviews';
 import CTA from '../components/utils/CTA';
 import ImageDisplay from '../components/utils/TourDisplay';
@@ -117,7 +115,6 @@ import Spinner from '../components/utils/Spinner';
 
 export default {
   components: {
-    Map,
     Reviews,
     CTA,
     ImageDisplay,

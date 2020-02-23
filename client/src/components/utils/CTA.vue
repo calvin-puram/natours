@@ -1,27 +1,29 @@
 <template>
-  <div
-    class="py-5 bg-light c2a1"
-    style="background:linear-gradient(rgba(0,0,0,.2), rgba(0,0,0, .3)), url('/img/showcase/tour-1-1.jpg')"
-  >
-    <div class="container">
-      <!-- Row -->
-      <div class="row justify-content-center">
-        <div class="col-md-7 text-center">
-          <h2 class="mb-3 text-white font-weight-medium">
-            WHAT ARE YOU WAITING FOR?
-          </h2>
-          <p class="font-weight-light text-white op-8">
-            {{ getTour.duration }} days. 1 adventure. Infinite memories. Make it
-            yours today!
-          </p>
-          <a
-            class="btn btn-danger-gradiant btn-md border-0 text-white mt-3 text-uppercase"
-            href="#"
-            ><span>Book Tour Now!</span></a
-          >
+  <div class="main_wrapper">
+    <div
+      class="py-5 bg-light c2a1 wrapper"
+      style="background:linear-gradient(rgba(0,0,0,.2), rgba(0,0,0, .2)), url('/img/showcase/tour-1-1.jpg')"
+    >
+      <div class="container">
+        <!-- Row -->
+        <div class="row justify-content-center">
+          <div class="col-md-7 text-center">
+            <h2 class="mb-3 text-white font-weight-medium">
+              WHAT ARE YOU WAITING FOR?
+            </h2>
+            <p class="font-weight-light text-white op-8">
+              {{ getTour.duration }} days. 1 adventure. Infinite memories. Make
+              it yours today!
+            </p>
+            <a
+              class="btn btn-danger-gradiant btn-md border-0 text-white mt-3 text-uppercase"
+              href="#"
+              ><span>Book Tour Now!</span></a
+            >
+          </div>
         </div>
+        <!-- Row -->
       </div>
-      <!-- Row -->
     </div>
   </div>
 </template>
@@ -101,5 +103,17 @@ export default {
 .c2a1 .btn-md {
   padding: 15px 45px;
   font-size: 16px;
+}
+
+.wrapper {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100vh;
+}
+
+.main_wrapper {
+  margin-bottom: 30px;
 }
 </style>

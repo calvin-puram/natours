@@ -1,10 +1,11 @@
 <template>
   <div>
-    <div v-if="loading">
+    <div v-if="isLoading">
       <Spinner />
     </div>
-    <div v-if="!loading">
-      <Showcase />
+    <div>
+      <div v-if="!isLoading"><Showcase /></div>
+
       <Card />
     </div>
   </div>
@@ -25,21 +26,13 @@ export default {
     Spinner
   },
   data() {
-    return {
-      loading: true
-    };
+    return {};
   },
   methods: {
-    ...mapActions(['allTours']),
-    handleLoading() {
-      setTimeout(() => {
-        this.loading = false;
-      }, 3000);
-    }
+    ...mapActions(['allTours'])
   },
   created() {
     this.allTours();
-    this.handleLoading();
   }
 };
 </script>
