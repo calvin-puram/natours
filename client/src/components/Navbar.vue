@@ -42,7 +42,12 @@
           </template>
 
           <v-list class="mt-1 text-center">
-            <v-list-item v-for="(item, index) in items" :key="index" link>
+            <v-list-item
+              v-for="(item, index) in items"
+              :key="index"
+              link
+              :to="item.route"
+            >
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item>
           </v-list>
@@ -65,7 +70,7 @@
 
         <v-list>
           <v-list-item
-            v-for="(item, index) in items"
+            v-for="(item, index) in profile"
             :key="index"
             link
             class="py-0"
@@ -86,7 +91,11 @@ export default {
   data: () => ({
     drawer: false,
     showMenu: false,
-    items: [{ title: 'Profile' }, { title: 'Logout' }]
+    items: [
+      { title: 'Login', route: '/login' },
+      { title: 'Register', route: '/register' }
+    ],
+    profile: [{ title: 'Profile' }, { title: 'Logout' }]
   })
 };
 </script>
