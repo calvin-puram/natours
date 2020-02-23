@@ -27,7 +27,7 @@
               :disabled="!valid"
               color="#009432"
               class="white--text "
-              @click="validate"
+              @click="handleSubmit"
             >
               Login
             </v-btn>
@@ -59,9 +59,14 @@ export default {
   }),
 
   methods: {
-    validate() {
+    handleSubmit() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
+        const user = {
+          email: this.email,
+          password: this.password
+        };
+        console.log(user);
       }
     }
   }
