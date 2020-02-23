@@ -40,8 +40,7 @@ export default {
 }
 
 .over {
-  overflow-x: scroll;
-  width: 100%;
+  overflow-x: auto;
 }
 
 .v-card {
