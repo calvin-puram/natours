@@ -76,6 +76,9 @@
           <v-list-item link class="py-0" to="/profile">
             <v-list-item-title>Profile</v-list-item-title>
           </v-list-item>
+          <v-list-item link class="py-0" @click="handleLogout">
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item>
         </v-list>
       </v-menu>
     </v-app-bar>

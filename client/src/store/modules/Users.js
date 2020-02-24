@@ -11,7 +11,7 @@ const getters = {
   getUserErrors: () => state.userErrors
 };
 const actions = {
-  //UPDATE USER
+  //UPDATE USER DETAILS
   async updateNewUser({ commit }, user) {
     try {
       commit('loading_status');
@@ -29,6 +29,21 @@ const actions = {
       console.log(err.response.data.msg);
       commit('userError_status', err.response.data.msg);
     }
+  },
+
+  //UPDATE PASSWORD
+  async updateUserPassword({ commit }, user) {
+    try {
+      commit('loading_status');
+      const res = await axios.patch(
+        'http://localhost:8000/api/v1/users/updatePassword',
+        user
+      );
+      return res;
+    } catch (err) {
+      console.log(err.response.data.msg);
+      commit('userError_status', err.response.data.msg);
+    }
   }
 };
 const mutations = {
@@ -37,7 +52,7 @@ const mutations = {
     state.userErrors = null;
   },
 
-  userError_status(status, err) {
+  userError_status(state, err) {
     state.userLoading = false;
     state.userErrors = err;
   }

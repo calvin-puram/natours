@@ -122,7 +122,12 @@
               @click:append="show3 = !show3"
             ></v-text-field>
 
-            <v-btn :disabled="!valid" color="success" class="mr-4 float-right">
+            <v-btn
+              :disabled="!valid"
+              color="success"
+              @click="updatePassword"
+              class="mr-4 float-right"
+            >
               SAVE PASSWORD
             </v-btn>
           </v-form>
@@ -174,7 +179,8 @@ export default {
     show3: false
   }),
   methods: {
-    ...mapActions(['updateNewUser']),
+    ...mapActions(['updateNewUser', 'updateUserPassword']),
+    // UPDATE USER DETAILS ACTION
     updateUser() {
       if (this.$refs.formm.validate()) {
         this.snackbar = true;
@@ -183,8 +189,28 @@ export default {
           email: this.email
         };
         this.updateNewUser(user).then(res => {
-          if (res.data.success) {
+          if (res && res.data.success) {
             this.$noty.success('Profile Details Updated successfully!');
+          } else {
+            this.$noty.error(this.getUserErrors);
+          }
+        });
+      }
+    },
+
+    // UPDATE PASSWORD ACTION
+    updatePassword() {
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
+        const user = {
+          currentPassword: this.currentPassword,
+          newPassword: this.newPassword,
+          passwordConfirm: this.confirmPassword
+        };
+
+        this.updateUserPassword(user).then(res => {
+          if (res && res.data.success) {
+            this.$noty.success('Password Updated successfully!');
           } else {
             this.$noty.error(this.getUserErrors);
           }
