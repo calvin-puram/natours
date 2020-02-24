@@ -22,8 +22,11 @@ const actions = {
         user
       );
       if (res.data.success) {
-        localStorage.setItem('token', JSON.stringify(res.data));
-        axios.defaults.headers.common['Authorization'] = res.data;
+        localStorage.setItem('token', JSON.stringify(res.data.data));
+        localStorage.setItem('new', JSON.stringify(res.data.token));
+        axios.defaults.headers.common[
+          'Authorization'
+        ] = `Bearer ${res.data.token}`;
         commit('login_status', res.data);
       }
       return res;

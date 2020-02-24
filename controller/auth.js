@@ -101,6 +101,7 @@ exports.logout = catchAsync(async (req, res, next) => {
 //@route  middleware
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
+
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
@@ -184,7 +185,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
       msg: 'your password reset token has been sent to your email'
     });
   } catch (err) {
-    console.log(err);
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });

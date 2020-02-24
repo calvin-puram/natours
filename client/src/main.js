@@ -11,8 +11,10 @@ Vue.use(VueNoty);
 
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
-const token = JSON.parse(localStorage.getItem('token'));
-Vue.prototype.$http.defaults.headers.common['Authorization'] = token;
+const token = JSON.parse(localStorage.getItem('new'));
+Vue.prototype.$http.defaults.headers.common[
+  'Authorization'
+] = `Bearer ${token}`;
 new Vue({
   router,
   store,

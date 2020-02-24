@@ -50,7 +50,7 @@
         <div class="main_profile">
           <h2 class="text-center headline">YOUR ACCOUNT SETTINGS</h2>
 
-          <v-form ref="form" v-model="valid">
+          <v-form ref="formm" v-model="valid">
             <v-text-field
               v-model="name"
               :counter="10"
@@ -69,16 +69,14 @@
             <div class="d-flex align-items-center mt-4">
               <v-avatar>
                 <img
-                  :src="
-                    `http://localhost:8000/img/users/${getToken.data.photo}`
-                  "
+                  :src="`http://localhost:8000/img/users/${getToken.photo}`"
                   alt="user"
                 />
               </v-avatar>
               <p class="ml-5">Choose new Photo</p>
             </div>
 
-            <v-btn color="success" class="mr-4 float-right" @click="validate">
+            <v-btn color="success" class="mr-4 float-right" @click="updateUser">
               SAVE SETTINGS
             </v-btn>
           </v-form>
@@ -124,12 +122,7 @@
               @click:append="show3 = !show3"
             ></v-text-field>
 
-            <v-btn
-              :disabled="!valid"
-              color="success"
-              class="mr-4 float-right"
-              @click="validate"
-            >
+            <v-btn :disabled="!valid" color="success" class="mr-4 float-right">
               SAVE PASSWORD
             </v-btn>
           </v-form>
@@ -140,9 +133,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
-  computed: mapGetters(['getToken']),
+  computed: mapGetters(['getToken', 'getUserErrors', 'getNewUser']),
   data: () => ({
     item: 1,
     items: [
@@ -181,15 +174,27 @@ export default {
     show3: false
   }),
   methods: {
-    validate() {
-      if (this.$refs.form.validate()) {
+    ...mapActions(['updateNewUser']),
+    updateUser() {
+      if (this.$refs.formm.validate()) {
         this.snackbar = true;
+        const user = {
+          name: this.name,
+          email: this.email
+        };
+        this.updateNewUser(user).then(res => {
+          if (res.data.success) {
+            this.$noty.success('Profile Details Updated successfully!');
+          } else {
+            this.$noty.error(this.getUserErrors);
+          }
+        });
       }
     }
   },
   created() {
-    this.name = this.getToken.data.name;
-    this.email = this.getToken.data.email;
+    this.name = this.getToken.name;
+    this.email = this.getToken.email;
   }
 };
 </script>

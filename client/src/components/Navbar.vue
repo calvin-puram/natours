@@ -66,7 +66,7 @@
         <template v-slot:activator="{ on }">
           <v-avatar v-on="on" class="mr-5" v-if="getToken">
             <img
-              :src="`http://localhost:8000/img/users/${getToken.data.photo}`"
+              :src="`http://localhost:8000/img/users/${getToken.photo}`"
               alt="user"
             />
           </v-avatar>
