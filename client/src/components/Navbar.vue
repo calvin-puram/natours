@@ -21,7 +21,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app color="#009432" dark>
+    <v-app-bar app color="#009432" dark flat>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <router-link class="hidden-xs-only ml-5" to="/">
         <v-img src="/img/logo-green.png" width="140px"></v-img>
@@ -73,13 +73,8 @@
         </template>
 
         <v-list>
-          <v-list-item
-            v-for="(item, index) in profile"
-            :key="index"
-            link
-            class="py-0"
-          >
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item link class="py-0" to="/profile">
+            <v-list-item-title>Profile</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -101,8 +96,7 @@ export default {
     items: [
       { title: 'Login', route: '/login' },
       { title: 'Register', route: '/register' }
-    ],
-    profile: [{ title: 'Profile' }, { title: 'Logout' }]
+    ]
   })
 };
 </script>
