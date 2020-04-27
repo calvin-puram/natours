@@ -21,8 +21,8 @@ const actions = {
       );
 
       if (res.data.success) {
-        localStorage.removeItem('token');
-        localStorage.setItem('token', JSON.stringify(res.data.data));
+        // localStorage.removeItem('token');
+        // localStorage.setItem('token', JSON.stringify(res.data.data));
       }
       return res;
     } catch (err) {

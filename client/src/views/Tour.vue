@@ -95,7 +95,8 @@
       </v-container>
       <!-- TOUR DISPLAY -->
       <ImageDisplay />
-
+      <!-- MAP -->
+      <TourMap />
       <!-- REVIEWS -->
       <div>
         <Reviews />
@@ -112,13 +113,15 @@ import CTA from '../components/utils/CTA';
 import ImageDisplay from '../components/utils/TourDisplay';
 import { mapGetters, mapActions } from 'vuex';
 import Spinner from '../components/utils/Spinner';
+import TourMap from '../components/utils/TourMap';
 
 export default {
   components: {
     Reviews,
     CTA,
     ImageDisplay,
-    Spinner
+    Spinner,
+    TourMap
   },
   computed: mapGetters(['getTour', 'isLoading']),
   data() {

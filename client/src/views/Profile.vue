@@ -69,7 +69,7 @@
             <div class="d-flex align-items-center mt-4">
               <v-avatar>
                 <img
-                  :src="`http://localhost:8000/img/users/${getToken.photo}`"
+                  :src="`http://localhost:8000/img/users/${getUser.photo}`"
                   alt="user"
                 />
               </v-avatar>
@@ -219,8 +219,9 @@ export default {
     }
   },
   created() {
-    this.name = this.getToken.name;
-    this.email = this.getToken.email;
+    this.name = this.getUser.name;
+    this.email = this.getUser.email;
+    this.userProfile();
   }
 };
 </script>

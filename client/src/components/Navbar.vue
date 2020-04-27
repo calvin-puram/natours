@@ -64,9 +64,9 @@
         v-if="isLoggedIn"
       >
         <template v-slot:activator="{ on }">
-          <v-avatar v-on="on" class="mr-5" v-if="getToken">
+          <v-avatar v-on="on" class="mr-5" v-if="getUser.photo">
             <img
-              :src="`http://localhost:8000/img/users/${getToken.photo}`"
+              :src="`http://localhost:8000/img/users/${getUser.photo}`"
               alt="user"
             />
           </v-avatar>
@@ -86,10 +86,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
+import router from '../router/index';
 
 export default {
-  computed: mapGetters(['isLoggedIn', 'isLoading', 'getToken']),
+  computed: mapGetters(['isLoggedIn', 'isLoading', 'getToken', 'getUser']),
   props: {
     source: String
   },
@@ -100,6 +101,17 @@ export default {
       { title: 'Login', route: '/login' },
       { title: 'Register', route: '/register' }
     ]
-  })
+  }),
+  methods: {
+    ...mapActions(['logout', 'userProfile']),
+    handleLogout() {
+      this.logout().then(() => {
+        this.$noty.success("You're loggout  successfully!");
+      });
+    }
+  },
+  created() {
+    this.userProfile();
+  }
 };
 </script>

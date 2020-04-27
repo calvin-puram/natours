@@ -29,10 +29,11 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions(['allTours'])
+    ...mapActions(['allTours', 'singleTours'])
   },
   created() {
     this.allTours();
+    this.singleTours();
   }
 };
 </script>
