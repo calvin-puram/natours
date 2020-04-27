@@ -6,63 +6,43 @@
       :center="center"
       :options="mapOptions"
       style="height: 100%"
-      @update:center="centerUpdate"
       @update:zoom="zoomUpdate"
     >
       <l-tile-layer :url="url" :attribution="attribution" />
-      <l-marker :lat-lng="withPopup">
-        <l-popup>
-          <div @click="innerClick">
-            I am a popup
-            <p v-show="showParagraph">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              sed pretium nisl, ut sagittis sapien. Sed vel sollicitudin nisi.
-              Donec finibus semper metus id malesuada.
-            </p>
-          </div>
-        </l-popup>
-      </l-marker>
-      <l-marker :lat-lng="withTooltip">
-        <l-tooltip :options="{ permanent: true, interactive: true }">
-          <div @click="innerClick">
-            I am a tooltip
-            <p v-show="showParagraph">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              sed pretium nisl, ut sagittis sapien. Sed vel sollicitudin nisi.
-              Donec finibus semper metus id malesuada.
-            </p>
-          </div>
-        </l-tooltip>
-      </l-marker>
+      <div v-for="popup in withPopup" :key="popup">
+        <l-marker :lat-lng="popup">
+          <l-popup>
+            <div>
+              Tour
+            </div>
+          </l-popup>
+        </l-marker>
+      </div>
     </l-map>
   </div>
 </template>
 
 <script>
 import { latLng } from 'leaflet';
-import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from 'vue2-leaflet';
+import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
 
 export default {
-  name: 'Example',
   components: {
     LMap,
     LTileLayer,
     LMarker,
-    LPopup,
-    LTooltip
+    LPopup
   },
+  props: ['tour'],
   data() {
     return {
-      zoom: 13,
-      center: latLng(47.41322, -1.219482),
+      zoom: 10,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      withPopup: latLng(47.41322, -1.219482),
-      withTooltip: latLng(47.41422, -1.250482),
+      withPopup: [],
       currentZoom: 11.5,
-      currentCenter: latLng(47.41322, -1.219482),
-      showParagraph: false,
+      center: {},
       mapOptions: {
         zoomSnap: 0.5
       },
@@ -72,16 +52,13 @@ export default {
   methods: {
     zoomUpdate(zoom) {
       this.currentZoom = zoom;
-    },
-    centerUpdate(center) {
-      this.currentCenter = center;
-    },
-    showLongText() {
-      this.showParagraph = !this.showParagraph;
-    },
-    innerClick() {
-      alert('Click!');
     }
+  },
+  created() {
+    this.tour.locations.forEach(tour => {
+      this.withPopup.push(latLng(tour.coordinates[1], tour.coordinates[0]));
+      this.center = latLng(tour.coordinates[1], tour.coordinates[0]);
+    });
   }
 };
 </script>

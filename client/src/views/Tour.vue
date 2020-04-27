@@ -96,7 +96,7 @@
       <!-- TOUR DISPLAY -->
       <ImageDisplay />
       <!-- MAP -->
-      <TourMap />
+      <TourMap :tour="getTour" />
       <!-- REVIEWS -->
       <div>
         <Reviews />
